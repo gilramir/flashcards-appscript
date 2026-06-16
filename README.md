@@ -22,11 +22,32 @@ on their own (or just leave a blank row above your data).
 ## Install (copy/paste)
 
 1. Open your Google Sheet → **Extensions ▸ Apps Script**.
-2. Paste the contents of `Code.gs` into the `Code.gs` file in the editor.
-3. **File ▸ New ▸ HTML file**, name it `Card` (no extension), paste in `Card.html`.
-4. Save, then reload the spreadsheet.
-5. A **Flashcards** menu appears → **Start Review (active sheet)**.
-   The first run asks you to authorize the script.
+2. At the top of the Apps Script screen, click where it says **"Untitled project"**
+   and give it a name like **Flashcards**. (This is just a label so you can
+   recognize it later — it doesn't affect how the app works.)
+3. Paste the contents of `Code.gs` into the `Code.gs` file in the editor.
+4. **File ▸ New ▸ HTML file**, name it `Card` (no extension), paste in `Card.html`.
+5. Save, then reload the spreadsheet.
+6. A **Flashcards** menu appears → **Start Review (active sheet)**.
+
+### The first time you run it: "Authorization required"
+
+The very first time you choose **Start Review**, Google shows a pop-up saying
+**"Authorization required."** This is normal and expected — Google is just
+asking your permission for the script to read the sheet you're reviewing.
+You only have to do this once. Walk through it like this:
+
+1. Click **Continue** (or **Review permissions**).
+2. Choose your own Google account from the list.
+3. You may see a warning screen: **"Google hasn't verified this app."** This
+   appears for any personal script you write yourself; it does not mean
+   anything is wrong. Click the small **"Advanced"** link, then click
+   **"Go to Flashcards (unsafe)"** at the bottom. (The "unsafe" wording is
+   Google's generic notice for unverified scripts — it's *your* script.)
+4. On the final screen, click **Allow**.
+
+After that the flashcard window opens. You won't be asked again unless you
+change the script later.
 
 ## Install (clasp, optional)
 
