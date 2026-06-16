@@ -1,11 +1,17 @@
 # Flashcards for Google Sheets
 
-Review the vocabulary on the **currently active sheet/tab** as shuffled flashcards.
+You can use Google Sheets to track vocabulary words in two language, and
+review them as flashcards. Each sheet (tab) in the Google Sheet doc is its
+own deck of cards.
+
+By using this app, you can review the vocabulary on the
+**currently active sheet/tab** as shuffled flashcards.
 The spreadsheet is never modified — shuffling happens in memory only.
 
 ## Card layout
 
-Each row is one translation:
+Each row is one translation. It can have 2 columns, or 3. If 3,
+columns B and C are combined into one card.
 
 | Column | Meaning                                              |
 |--------|------------------------------------------------------|
