@@ -44,5 +44,8 @@ clasp push
 - **Previous / Next** buttons or **←/→** arrow keys move through the deck.
 - **Shuffle & restart** button (or press **S**) reshuffles and jumps back to card 1.
   It re-reads the sheet, so any edits you made are picked up.
+- **Jump to row** button (or press **J**) moves the cursor to the source row of the
+  current card — handy for fixing a typo you spotted. The counter shows the row number.
+  After editing, press **S** to reshuffle and pick up the change.
 - The deck is reshuffled each time you start a review.
 - Each tab is an independent deck — just switch tabs and start again.

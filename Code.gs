@@ -35,10 +35,13 @@ function startReview() {
 }
 
 /**
- * Reads the active sheet and returns a shuffled array of cards.
+ * Reads the active sheet and returns a shuffled deck.
  * Called from the client-side dialog when it loads.
  *
- * @return {Array<{front: string, back: string}>}
+ * Each card records the 1-based source row and the sheet name so the
+ * dialog can jump the cursor back to it for editing.
+ *
+ * @return {{sheet: string, cards: Array<{front: string, back: string, row: number}>}}
  */
 function getCards() {
   var sheet = SpreadsheetApp.getActiveSheet();
@@ -56,11 +59,28 @@ function getCards() {
     }
 
     var back = c === '' ? b : b + ' / ' + c;
-    cards.push({ front: a, back: back });
+    cards.push({ front: a, back: back, row: i + 1 });
   }
 
   shuffle_(cards);
-  return cards;
+  return { sheet: sheet.getName(), cards: cards };
+}
+
+/**
+ * Moves the cursor to the given row on the given sheet, so the user can
+ * fix a typo they spotted on a card. Selects column A of that row.
+ *
+ * @param {string} sheetName
+ * @param {number} row 1-based row number
+ */
+function jumpToRow(sheetName, row) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(sheetName);
+  if (!sheet) {
+    throw new Error('Sheet "' + sheetName + '" not found.');
+  }
+  ss.setActiveSheet(sheet);
+  sheet.getRange(row, 1).activate();
 }
 
 /**

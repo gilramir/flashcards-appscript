@@ -94,12 +94,14 @@
     </div>
     <div id="controls">
       <button id="shuffleBtn" onclick="shuffle()">&#8635; Shuffle &amp; restart</button>
+      <button id="jumpBtn" onclick="jumpTo()">&#9998; Jump to row</button>
     </div>
-    <div id="hint">Click the card or press Space to flip &middot; &#8592;/&#8594; to navigate &middot; S to shuffle</div>
+    <div id="hint">Click the card or press Space to flip &middot; &#8592;/&#8594; to navigate &middot; S to shuffle &middot; J to jump</div>
   </div>
 
   <script>
     var cards = [];
+    var sheetName = '';
     var index = 0;
     var showingBack = false;
 
@@ -117,7 +119,7 @@
       document.getElementById('side').textContent =
         showingBack ? 'Translation' : 'Term';
       document.getElementById('counter').textContent =
-        'Card ' + (index + 1) + ' of ' + cards.length;
+        'Card ' + (index + 1) + ' of ' + cards.length + ' · row ' + card.row;
       document.getElementById('flipBtn').textContent =
         showingBack ? 'Show Term' : 'Flip';
     }
@@ -146,11 +148,22 @@
       loadDeck();
     }
 
+    function jumpTo() {
+      if (cards.length === 0) return;
+      var row = cards[index].row;
+      google.script.run
+        .withFailureHandler(function (err) {
+          document.getElementById('side').textContent = 'Jump failed: ' + err.message;
+        })
+        .jumpToRow(sheetName, row);
+    }
+
     document.addEventListener('keydown', function (e) {
       if (e.code === 'Space') { e.preventDefault(); flip(); }
       else if (e.code === 'ArrowRight') { next(); }
       else if (e.code === 'ArrowLeft') { prev(); }
       else if (e.code === 'KeyS') { shuffle(); }
+      else if (e.code === 'KeyJ') { jumpTo(); }
     });
 
     // Fetch a freshly shuffled deck from the server (re-reads the sheet,
@@ -160,7 +173,8 @@
       document.getElementById('cardText').textContent = 'Shuffling…';
       google.script.run
         .withSuccessHandler(function (data) {
-          cards = data || [];
+          cards = (data && data.cards) || [];
+          sheetName = (data && data.sheet) || '';
           index = 0;
           showingBack = false;
           document.getElementById('shuffleBtn').disabled = false;
