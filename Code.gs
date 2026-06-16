@@ -27,8 +27,8 @@ function onOpen() {
 function startReview() {
   var html = HtmlService.createTemplateFromFile('Card')
     .evaluate()
-    .setWidth(520)
-    .setHeight(420);
+    .setWidth(720)
+    .setHeight(600);
 
   var sheetName = SpreadsheetApp.getActiveSheet().getName();
   SpreadsheetApp.getUi().showModelessDialog(html, 'Flashcards — ' + sheetName);
