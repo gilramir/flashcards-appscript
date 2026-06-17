@@ -1,6 +1,6 @@
 # Flashcards for Google Sheets
 
-You can use Google Sheets to track vocabulary words in two language, and
+You can use Google Sheets to track vocabulary words in two languages and
 review them as flashcards. Each sheet (tab) in the Google Sheet doc is its
 own deck of cards.
 
