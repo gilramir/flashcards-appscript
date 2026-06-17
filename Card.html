@@ -2,6 +2,9 @@
 <html>
 <head>
   <base target="_top">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200..900&family=Noto+Serif+TC:wght@200..900&family=Sarabun:wght@400&display=swap" rel="stylesheet">
   <style>
     html, body {
       margin: 0;
@@ -41,6 +44,20 @@
       font-size: 56px;
       line-height: 1.3;
       word-break: break-word;
+    }
+    #card .text.chinese {
+      font-family: "Noto Serif TC", serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+    }
+    #card .text.korean {
+      font-family: "Noto Serif KR", serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+    }
+    #card .text.thai {
+      font-family: "Sarabun", sans-serif;
+      font-weight: 400;
     }
     #side {
       text-align: center;
@@ -105,6 +122,18 @@
     var index = 0;
     var showingBack = false;
 
+    function hasChinese(text) {
+      return /[㐀-鿿豈-﫿]/.test(text);
+    }
+
+    function hasKorean(text) {
+      return /[가-힣]/.test(text);
+    }
+
+    function hasThai(text) {
+      return /[\u0E00-\u0E7F]/.test(text);
+    }
+
     function render() {
       if (cards.length === 0) {
         document.getElementById('cardText').textContent =
@@ -114,8 +143,12 @@
         return;
       }
       var card = cards[index];
-      document.getElementById('cardText').textContent =
-        showingBack ? card.back : card.front;
+      var text = showingBack ? card.back : card.front;
+      var cardText = document.getElementById('cardText');
+      cardText.textContent = text;
+      cardText.classList.toggle('chinese', hasChinese(text));
+      cardText.classList.toggle('korean', hasKorean(text));
+      cardText.classList.toggle('thai', hasThai(text));
       document.getElementById('side').textContent =
         showingBack ? 'Translation' : 'Term';
       document.getElementById('counter').textContent =
