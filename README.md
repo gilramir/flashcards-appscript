@@ -8,9 +8,22 @@ By using this app, you can review the vocabulary on the
 **currently active sheet/tab** as shuffled flashcards.
 The spreadsheet is never modified — shuffling happens in memory only.
 
+**Note**: This app select specialized fonts for Chinese, Korean, and Thai,
+as they look better than plain Arial.
+
 ## Card layout
 
-Each row is one translation. It can have 2 columns, or 3. If 3,
+Each row is one translation. It can have 2 columns, or 3.
+
+Here is an example of 3 columns:
+
+![Korean](images/fgs-sample-ko.png "Korean")
+
+and 3 columns:
+
+![Chinese](images/fgs-sample-zh.png "Chinese")
+
+If 3,
 columns B and C are combined into one card.
 
 | Column | Meaning                                              |
@@ -24,6 +37,19 @@ columns B and C are combined into one card.
 
 Rows missing column A or column B are skipped, so header rows usually drop out
 on their own (or just leave a blank row above your data).
+
+## Usage
+
+- Switch to the tab you want to review, then **Flashcards ▸ Start Review**.
+- Click the card (or press **Space**) to flip between term and translation.
+- **Previous / Next** buttons or **←/→** arrow keys move through the deck.
+- **Shuffle & restart** button (or press **S**) reshuffles and jumps back to card 1.
+  It re-reads the sheet, so any edits you made are picked up.
+- **Jump to row** button (or press **J**) moves the cursor to the source row of the
+  current card — handy for fixing a typo you spotted. The counter shows the row number.
+  After editing, press **S** to reshuffle and pick up the change.
+- The deck is reshuffled each time you start a review.
+- Each tab is an independent deck — just switch tabs and start again.
 
 ## Install (copy/paste)
 
@@ -55,64 +81,86 @@ You only have to do this once. Walk through it like this:
 After that the flashcard window opens. You won't be asked again unless you
 change the script later.
 
-## Install (clasp, optional)
+## Installation Walkthrough
 
-[clasp](https://github.com/google/clasp) lets you push Apps Script files from
-the command line instead of copy-pasting through the browser editor.
+### Step 1: In your Google Sheet, press "Extensions"
+![Step 1](images/fgs-inst-01.png "Step 1")
 
-### 1. Set up clasp
+### Step 2: Press "Apps Script"
+![Step 2](images/fgs-inst-02.png "Step 2")
 
-```bash
-npm install -g @google/clasp
-clasp login          # opens a browser window to authorize clasp
-```
+### Step 3: It will be untitled; click "Untitle project"
+![Step 3](images/fgs-inst-03.png "Step 3")
 
-### 2. Attach to an existing spreadsheet
+### Step 4: Give it any name (optional)
+![Step 4](images/fgs-inst-04.png "Step 4")
 
-Get your spreadsheet ID from its URL:
-`https://docs.google.com/spreadsheets/d/**<SPREADSHEET_ID>**/edit`
+### Step 5: You will have an empty Code.gs file
+![Step 5](images/fgs-inst-05.png "Step 5")
 
-Then, from inside this repo's directory, create a new Apps Script project
-bound to that spreadsheet:
+### Step 6: In github.com select the Code.gs file and click the "copy"icon
 
-```bash
-clasp create --type sheets --title "Flashcards" --parentId <SPREADSHEET_ID>
-```
+[Link to Code.gs](https://github.com/gilramir/flashcards-appscript/blob/main/Code.gs)
 
-This writes a `.clasp.json` file (with the new script's ID) into the current
-directory. The script project is now linked to your spreadsheet.
+![Step 6](images/fgs-inst-06.png "Step 6")
 
-### 3. Push the files
 
-```bash
-clasp push
-```
+### Step 7: In your AppsScript, highlight the empty function
+![Step 7](images/fgs-inst-07.png "Step 7")
 
-This uploads `Code.gs`, `Card.html`, and `appsscript.json` to the script
-project. Reload your spreadsheet and the **Flashcards** menu will appear.
+### Step 8: Press CTRL-V to paste the new contents
+![Step 8](images/fgs-inst-08.png "Step 8")
 
----
+### Step 9: Press "+" to add a new file
+![Step 9](images/fgs-inst-09.png "Step 9")
 
-**If the spreadsheet already has scripts you want to keep**, pull them down
-first so you don't overwrite them:
+### Step 10: Select "HTML" as the new file type
+![Step 10](images/fgs-inst-10.png "Step 10")
 
-```bash
-# Find the script ID: Extensions ▸ Apps Script ▸ Project Settings ▸ Script ID
-clasp clone <SCRIPT_ID>
-# Then copy Code.gs and Card.html from this repo into the cloned directory,
-# being careful not to clobber any existing .gs files you need.
-clasp push
-```
+### Step 11: The new HTML file will have no name. Select "Untitled"
+![Step 11](images/fgs-inst-11.png "Step 11")
 
-## Usage
+### Step 12: Name it "Card" (without the ".html" extension)
+![Step 12](images/fgs-inst-12.png "Step 12")
 
-- Switch to the tab you want to review, then **Flashcards ▸ Start Review**.
-- Click the card (or press **Space**) to flip between term and translation.
-- **Previous / Next** buttons or **←/→** arrow keys move through the deck.
-- **Shuffle & restart** button (or press **S**) reshuffles and jumps back to card 1.
-  It re-reads the sheet, so any edits you made are picked up.
-- **Jump to row** button (or press **J**) moves the cursor to the source row of the
-  current card — handy for fixing a typo you spotted. The counter shows the row number.
-  After editing, press **S** to reshuffle and pick up the change.
-- The deck is reshuffled each time you start a review.
-- Each tab is an independent deck — just switch tabs and start again.
+### Step 13: In github.com select the Card.html file and click the "copy"icon
+
+[Link to Card.html](https://github.com/gilramir/flashcards-appscript/blob/main/Card.html)
+
+![Step 13](images/fgs-inst-13.png "Step 13")
+
+### Step 14: In your AppsScript, highlight the empty HTML contents
+![Step 14](images/fgs-inst-14.png "Step 14")
+
+### Step 15: Press CTRL-V to paste the new contents, then the disk icon for "Save"
+![Step 15](images/fgs-inst-15.png "Step 15")
+
+### Step 16: It is now "Saved to Drive"; you can close this web page.
+![Step 16](images/fgs-inst-16.png "Step 16")
+
+### Step 17: In your Google Sheet, reload the web page
+![Step 17](images/fgs-inst-17.png "Step 17")
+
+### Step 18: After it reloads, you now have a "Flashcards" menu item
+![Step 18](images/fgs-inst-18.png "Step 18")
+
+### Step 19: Click it, and click "Start Review (active sheet)"
+![Step 19](images/fgs-inst-19.png "Step 19")
+
+### Step 20: First time, you must click "OK" to authorize the app
+![Step 20](images/fgs-inst-20.png "Step 20")
+
+### Step 21: Click "Advanced"
+![Step 21](images/fgs-inst-21.png "Step 21")
+
+### Step 22: Click "Go to (your app name)"
+![Step 22](images/fgs-inst-22.png "Step 22")
+
+### Step 23: Check "Select all" to give the app permissions
+![Step 23](images/fgs-inst-23.png "Step 23")
+
+### Step 24: Click "Continue"
+![Step 24](images/fgs-inst-24.png "Step 24")
+
+### Step 25: Now you have Flashcards!
+![Step 25](images/fgs-inst-25.png "Step 25")
